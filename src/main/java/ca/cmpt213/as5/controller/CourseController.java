@@ -8,7 +8,7 @@ import ca.cmpt213.as5.model.*;
 import ca.cmpt213.as5.Organize_Data.SetDepartmentIds;
 import ca.cmpt213.as5.model.Courses.*;
 import ca.cmpt213.as5.output.Print;
-import ca.cmpt213.as5.reader.CsvReader;
+import ca.cmpt213.as5.reader.Reader;
 import ca.cmpt213.as5.watchers.Watcher;
 import ca.cmpt213.as5.watchers.WatcherInput;
 import org.springframework.http.HttpStatus;
@@ -32,7 +32,7 @@ public class CourseController {
     private List<CoursePlanner> courseList = new ArrayList<>();
     private static final String GREETING_MESSAGE = "Course planner written by Kourosh Azizi and Quince Bielka for part 2.";
     private static final String CSV_FILE_PATH = "data/course_data_2018.csv";
-    private CsvReader csvReaderObj;
+    private Reader readerObj;
     private SetCourse setCourseObj;
     private SetCourse setCourseUniqueObj;
     private SetDepartmentIds setDepartmentIdsObj;
@@ -205,14 +205,14 @@ public class CourseController {
 
     // ........................... Helper function .......................... //
     private void readCSV() throws ResourceNotFoundException, IOException, CourseNotFoundException {
-        if(csvReaderObj == null) {
-            csvReaderObj = new CsvReader(CSV_FILE_PATH);
+        if(readerObj == null) {
+            readerObj = new Reader(CSV_FILE_PATH);
 //            csvReaderObj.printCsvSentenceList();       // print every line read from csv : kept for debugging
         }
 
         if(setCourseObj == null){
             setCourseObj = new SetCourse();
-            setCourseObj.setInformation(csvReaderObj.getSentenceList());
+            setCourseObj.setInformation(readerObj.getSentenceList());
             courseList = setCourseObj.getCourseList();
             //computeMergedCourseList();
         }

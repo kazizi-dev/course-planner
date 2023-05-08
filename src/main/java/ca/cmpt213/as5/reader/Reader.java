@@ -17,47 +17,36 @@ import java.util.List;
     list. It then allows the user to access the list of all lines.
  */
 
-public class CsvReader {
+public class Reader {
     private static final String SPLIT_BY_COMMA = ",";
     private static final int FAILURE = -1;
     private String csvFilePath;
-    private List<String> sentenceLinesList = new ArrayList();
+    private List<String> sentenceLines = new ArrayList();
 
-    public CsvReader(String csvFilePath) throws ResourceNotFoundException, IOException {
-        try{
-            if(csvFilePath.endsWith(".csv")) {
-                this.csvFilePath = csvFilePath;
-                readFile(this.csvFilePath);
-            }
-            else{
-                throw new ResourceNotFoundException("No .csv file found!");
-            }
+    public Reader(String filePath) throws ResourceNotFoundException, IOException {
+        if (!filePath.endsWith(".csv")) {
+            throw new ResourceNotFoundException("No .csv file found!");
         }
-        catch(ResourceNotFoundException e){
-            System.exit(FAILURE);
-        }
-    }
-
-    private void readFile(String csvPathFile) throws IOException, ResourceNotFoundException {
-        try{
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(this.csvFilePath));
-            String sentenceLine;
-            while ((sentenceLine = bufferedReader.readLine()) != null) {
-                sentenceLine = Arrays.toString(sentenceLine.split(SPLIT_BY_COMMA));
-                sentenceLinesList.add(getRidOfUselessStrings(sentenceLine));
-            }
-        }
-        catch(IOException e){
-            System.out.println("IOException occurred while reading the CSV file.");
-            System.exit(FAILURE);
-        }
+        this.csvFilePath = filePath;
+        readFile();
     }
 
     public List<String> getSentenceList(){
-        return sentenceLinesList;
+        return sentenceLines;
     }
 
     // .............. Helper functions ................ //
+    private void readFile() throws IOException, ResourceNotFoundException {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(csvFilePath))) {
+            String sentenceLine;
+            while ((sentenceLine = bufferedReader.readLine()) != null) {
+                sentenceLine = Arrays.toString(sentenceLine.split(SPLIT_BY_COMMA));
+                String cleanLine = getRidOfUselessStrings(sentenceLine);
+                sentenceLines.add(cleanLine);
+            }
+        }
+    }
+
     private String getRidOfUselessStrings(String targetLine){
         return targetLine
                 .replace("[", "").replace("]", "")
@@ -80,9 +69,9 @@ public class CsvReader {
                 .replaceFirst(" ","").replaceFirst(" ","");
     }
 
-    // 1. Debugging
+    // debugging
     public void printCsvSentenceList(){
-        for(String sentence : sentenceLinesList){
+        for(String sentence : sentenceLines){
             System.out.println(sentence);
         }
         System.out.println("*** End of testing ***");
