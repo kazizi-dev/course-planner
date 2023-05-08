@@ -7,18 +7,13 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     communicates with the web ui.
  */
 @JsonPropertyOrder({ "appName", "authorName"})
-public class AppAndAuthor {
+public class About {
     private String appName;
     private String authorName;
 
-    public AppAndAuthor(){
-        appName = "Kourosh and Quince Awesome App";
-        authorName = "Kourosh Azizi and Quince Bielka";
-    }
-
-    public AppAndAuthor(String appName, String authorName){
-        this.appName = appName;
-        this.authorName = authorName;
+    public About(){
+        appName = "Course Planner";
+        authorName = "Kourosh Azizi";
     }
 
     public void setAppName(String appName){

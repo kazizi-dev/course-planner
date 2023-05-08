@@ -24,6 +24,10 @@ public class SetCourse {
     private static final int COMPONENT_CODE_INDEX = 7;
     private static final String STRINGS_TO_GET_RID_OF = ", [^\"]\"$#@&%~*/^!?";
     private List<CoursePlanner> courseList = new ArrayList<>();
+    public SetCourse(List<CoursePlanner> courseList){
+//        this.courseList = courseList;
+    }
+
     public SetCourse(){
 
     }
