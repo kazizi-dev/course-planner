@@ -1,5 +1,8 @@
-# course-planner
-A course planner web application to process university enrollment data.
-
-## Technologies:
-- Java and Spring Framework
+SEMESTER: semester
+SUBJECT: CMPT or MSE
+CATALOGNUMBER: 276 or 110
+LOCATION: BURNABY or SURREY
+ENROLLMENTCAPACITY: 26
+ENROLLMENTTOTAL: 25
+INSTRUCTORS: <name>
+COMPONENTCODE: LEC or TUT or LAB

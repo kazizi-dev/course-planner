@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="ca/cmpt213/as5/controller/" kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/java/ca/cmpt213/as5/controller"/>
+	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="build/classes/java/main"/>
+</classpath>
